@@ -112,12 +112,26 @@ def run_simulation_and_export(input_file, output_file=None):
     if io:
         nvolt = (iGeometry[:, 0] < 0).sum()
         nepsr = (iGeometry[:, 0] > 0).sum()
+        total_points = (Nx+1) * (Ny+1) * (Nz+1)
+
         print('Title = %s' % Parm['title'])
         print('Cells = %d x %d x %d = %d' % (Nx, Ny, Nz, Nx * Ny * Nz))
-        print('Points = %d x %d x %d = %d' % (Nx+1, Ny+1, Nz+1, (Nx+1) * (Ny+1) * (Nz+1)))
+        print('Points = %d x %d x %d = %d' % (Nx+1, Ny+1, Nz+1, total_points))
         print('No. of voltages    = %d' % (len(fVolt) - 1))
         print('No. of dielectrics = %d' % (len(fEpsr) - 1))
         print('No. of geometries  = %d + %d = %d' % (nvolt, nepsr, iGeometry.shape[0]))
+
+        # メモリ使用量の見積もり
+        nf = 4 if f_dtype == 'f4' else 8
+        ni = 1 if i_dtype == 'u1' else 4
+        mem_mb = total_points * (nf + ni + ni) / 1024**2
+        print('Estimated memory   = %.1f MB' % mem_mb)
+
+        # 大きなグリッドの場合は警告
+        if total_points > 10000000:  # 1000万点以上
+            print('*** WARNING: Large grid size! This may take significant time and memory.')
+            print('*** Grid points: %.1f million' % (total_points / 1e6))
+
         print('Omega              = %g' % Parm['solver'][0])
         print('Max iterations     = %d' % Parm['solver'][1])
         print('Convergence        = %.7f' % Parm['solver'][3])
@@ -162,7 +176,7 @@ def run_simulation_and_export(input_file, output_file=None):
         Nx, Ny, Nz,
         Npx, Npy, Npz, Ipx, Ipy, Ipz,
         iMin, iMax, jMin, jMax, kMin, kMax, Ni, Nj, Nk, N0, NN,
-        RXp, RXm, RYp, RYm, RZp, RZm, None)  # fp_log=None
+        RXp, RXm, RYp, RYm, RZp, RZm, sys.stdout)  # ログを標準出力へ
 
     cpu[2] = sol.cputime.t(comm_size, GPU)
 

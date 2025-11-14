@@ -162,7 +162,7 @@ def run_simulation_and_export(input_file, output_file=None):
         Nx, Ny, Nz,
         Npx, Npy, Npz, Ipx, Ipy, Ipz,
         iMin, iMax, jMin, jMax, kMin, kMax, Ni, Nj, Nk, N0, NN,
-        RXp, RXm, RYp, RYm, RZp, RZm, None)
+        RXp, RXm, RYp, RYm, RZp, RZm, sys.stdout)
 
     cpu[2] = sol.cputime.t(comm_size, GPU)
 
