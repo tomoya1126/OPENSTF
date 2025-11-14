@@ -1,0 +1,21 @@
+OpenSTF 4 2
+title = 電気四重極
+xmesh = -1 100 1
+ymesh = -1 100 1
+zmesh = -0.5 50 0.5
+volt = -1 
+volt = 1 
+geometry = 1 1 1 -0.5 -0.6 -0.5 -0.6 -0.05 0.05 
+geometry = 1 2 1 0.5 0.6 -0.5 -0.6 -0.05 0.05 
+geometry = 1 1 1 0.5 0.6 0.5 0.6 -0.05 0.05 
+geometry = 1 2 1 -0.5 -0.6 0.5 0.6 -0.05 0.05 
+#plot3dgeom = 1
+solver = 1.97 3000 100 1e-5
+plot2d = V Z 0
+plot2d = E Z 0
+2dfigure = 1 1
+2ddb = 1
+2dcontour = 0
+2dobject = 1 1
+2dlog = 1
+end

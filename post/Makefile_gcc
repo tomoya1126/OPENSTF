@@ -1,0 +1,32 @@
+PROGRAM = ../ost_post
+
+OBJS    =     \
+Main.o        \
+post_data.o   \
+readout.o     \
+post.o        \
+makeL1d.o     \
+makeP2d.o     \
+plotIter.o    \
+plotL1d.o     \
+plotP2d.o     \
+ev2d.o        \
+ev2dlib.o     \
+ev3dlib.o     \
+../sol/utils.o       \
+../sol/ev3d.o
+
+CC      = gcc
+CFLAGS  = -Ofast -I../include -Wall
+LDFLAGS = -Ofast
+LIBS    = -lm
+
+$(PROGRAM): $(OBJS)
+	@echo "Loading $(PROGRAM) ... "
+	@$(CC) $(LDFLAGS) -o $(PROGRAM) $(OBJS) $(LIBS)
+
+.c.o:
+	$(CC) -c $(CFLAGS) $<
+
+clean:
+	rm -f *.o

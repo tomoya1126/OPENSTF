@@ -1,0 +1,46 @@
+PROGRAM = ../ost_cuda
+
+OBJS    =         \
+Main.o            \
+solve.o           \
+setup_gpu.o       \
+allocfree_gpu.o   \
+info_gpu.o        \
+check_gpu.o       \
+cuda_memory.o     \
+../sol/input_data.o      \
+../sol/monitor.o         \
+../sol/geomlines.o       \
+../sol/setupsize.o       \
+../sol/setupfactor.o     \
+../sol/setupid.o         \
+../sol/ingeometry.o      \
+../sol/vmisc.o           \
+echar.o           \
+../sol/writeout.o        \
+../sol/utils.o           \
+../sol/cputime.o         \
+../sol/plot3dGeom.o      \
+../sol/ev3d.o
+
+CC      = nvcc
+CFLAGS  = -O3 -I../include
+#CFLAGS  += -D_DOUBLE
+#CFLAGS  += -D_ID32
+LDFLAGS = -O3
+LIBS    =
+
+$(PROGRAM): $(OBJS)
+	@echo "Loading $(PROGRAM) ... "
+	@$(CC) $(LDFLAGS) -o $(PROGRAM) $(OBJS) $(LIBS)
+
+.SUFFIXES: .cu
+
+echar.o: ../sol/echar.c
+	$(CC) -c $(CFLAGS) $?
+
+.cu.o:
+	$(CC) -c $(CFLAGS) $<
+
+clean:
+	rm -f *.o

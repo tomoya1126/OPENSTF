@@ -1,0 +1,25 @@
+OpenSTF 4 2
+title = 同軸線路
+xmesh = -1 400 1
+ymesh = -1 400 1
+zmesh = -1 2 1
+volt = 1 
+volt = 0 
+epsr = 2.77 
+geometry = 1 1 13 -1 1 -1 1 -1 1 
+geometry = 2 1 13 -0.8 0.8 -0.8 0.8 -1 1 
+geometry = 1 2 13 -0.2 0.2 -0.2 0.2 -1 1 
+#plot3dgeom = 1
+solver = 1.98 2000 50 1e-6
+plot1d = V X 0 0
+plot1d = E X 0 0
+1ddb = 0
+1dlog = 1
+plot2d = V Z 0
+plot2d = E Z 0
+2dfigure = 1 0
+2ddb = 0
+2dcontour = 1
+2dobject = 1 1
+2dlog = 1
+end

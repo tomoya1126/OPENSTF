@@ -1,0 +1,4 @@
+OpenSTF 4 2
+#plot3dgeom = 1
+solver = 1.97 3000 100 1e-5
+end

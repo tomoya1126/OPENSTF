@@ -1,0 +1,58 @@
+PROGRAM = ../ost_mpi
+
+MPIOPT  = -D_MPI
+OMPOPT  = -fopenmp
+
+OBJS    =     \
+Main.o        \
+solve.o       \
+setup_mpi.o   \
+comm.o        \
+comm_X.o      \
+comm_Y.o      \
+comm_Z.o      \
+../sol/input_data.o  \
+../sol/monitor.o     \
+../sol/geomlines.o   \
+../sol/setupsize.o   \
+../sol/setupfactor.o \
+../sol/setupid.o     \
+../sol/ingeometry.o  \
+../sol/update.o      \
+../sol/vmisc.o       \
+../sol/echar.o       \
+../sol/writeout.o    \
+../sol/utils.o       \
+../sol/plot3dGeom.o  \
+../sol/ev3d.o
+
+CC      = mpicc
+CFLAGS  = -O3 -I../include -Wall
+#CFLAGS  += -D_DOUBLE
+#CFLAGS  += -D_ID32
+LDFLAGS = -O3 $(OMPOPT)
+#LIBS    =
+LIBS    = -lm
+
+$(PROGRAM): $(OBJS)
+	@echo "Loading $(PROGRAM) ... "
+	@$(CC) $(LDFLAGS) -o $(PROGRAM) $(OBJS) $(LIBS)
+
+Main.o: Main.c
+	$(CC) -c $(CFLAGS) $(OMPOPT) $?
+sor.o: sor.c
+	$(CC) -c $(CFLAGS) $(OMPOPT) $?
+comm.o: comm.c
+	$(CC) -c $(CFLAGS) $(MPIOPT) $?
+comm_X.o: comm_X.c
+	$(CC) -c $(CFLAGS) $(MPIOPT) $?
+comm_Y.o: comm_Y.c
+	$(CC) -c $(CFLAGS) $(MPIOPT) $?
+comm_Z.o: comm_Z.c
+	$(CC) -c $(CFLAGS) $(MPIOPT) $?
+
+.c.o:
+	$(CC) -c $(CFLAGS) $<
+
+clean:
+	rm -f *.o

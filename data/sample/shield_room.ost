@@ -1,0 +1,25 @@
+OpenSTF 4 2
+title = 磁気シールドルーム
+xmesh = -5 400 5
+ymesh = -4 320 4
+zmesh = -2 280 5
+volt = -2 
+volt = 5 
+epsr = 1000 高磁性体
+epsr = 1 空気
+geometry = 1 1 1 -5 5 -4 4 -2 -2 -電極
+geometry = 1 2 1 -5 5 -4 4 5 5 +電極
+geometry = 2 1 1 -3.1 3.1 -2.1 2.1 -0.1 3.1 高磁性体壁
+geometry = 2 2 1 -2.999 2.999 -1.999 1.999 0.001 2.999 室内空気
+#plot3dgeom = 1
+solver = 1.99 2000 100 1e-5
+plot1d = E Z 0 0
+1ddb = 1
+1dlog = 1
+plot2d = E Y 0
+2dfigure = 1 0
+2ddb = 1
+2dcontour = 1
+2dobject = 1 1
+2dlog = 1
+end

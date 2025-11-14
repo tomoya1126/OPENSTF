@@ -1,0 +1,60 @@
+PROGRAM = ../ost_cuda_mpi
+
+MPIOPT  = -D_MPI -I$(MPI_INCLUDE)
+
+OBJS    =      \
+Main.o         \
+solve.o        \
+comm_cuda_X.o  \
+comm_cuda_Y.o  \
+comm_cuda_Z.o  \
+info_gpu_mpi.o \
+rank2device.o  \
+../mpi/comm.o          \
+../mpi/comm_X.o        \
+../mpi/comm_Y.o        \
+../mpi/comm_Z.o        \
+../mpi/setup_mpi.o     \
+../cuda/allocfree_gpu.o \
+../cuda/check_gpu.o     \
+../cuda/cuda_memory.o   \
+../cuda/setup_gpu.o     \
+../sol/input_data.o    \
+../sol/monitor.o       \
+../sol/geomlines.o     \
+../sol/setupsize.o     \
+../sol/setupfactor.o   \
+../sol/setupid.o       \
+../sol/ingeometry.o    \
+../sol/vmisc.o         \
+../cuda/echar.o         \
+../sol/writeout.o      \
+../sol/utils.o         \
+../sol/plot3dGeom.o    \
+../sol/ev3d.o
+
+CC      = nvcc
+CFLAGS  = -O3 -I../include
+#CFLAGS  += -D_DOUBLE
+#CFLAGS  += -D_ID32
+LDFLAGS = -O3 -L$(MPI_LIB)
+LIBS    = -lmpi
+
+$(PROGRAM): $(OBJS)
+	@echo "Loading $(PROGRAM) ... "
+	@$(CC) $(LDFLAGS) -o $(PROGRAM) $(OBJS) $(LIBS)
+
+.SUFFIXES: .cu
+
+comm_cuda_X.o: comm_cuda_X.cu
+	$(CC) -c $(CFLAGS) $(MPIOPT) $?
+comm_cuda_Y.o: comm_cuda_Y.cu
+	$(CC) -c $(CFLAGS) $(MPIOPT) $?
+comm_cuda_Z.o: comm_cuda_Z.cu
+	$(CC) -c $(CFLAGS) $(MPIOPT) $?
+
+.cu.o:
+	$(CC) -c $(CFLAGS) $<
+
+clean:
+	rm -f *.o

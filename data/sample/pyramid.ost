@@ -1,0 +1,25 @@
+OpenSTF 4 2
+title = pyramid
+xmesh = -5 50 5
+ymesh = -5 50 5
+zmesh = -5 50 5
+volt = -1 -V
+volt = +1 +V
+epsr = 2.0 Er
+geometry = 2 1 43 -2 2 0 0 4 4 2 2 
+geometry = 1 1 1 -2 2 -2 2 -2 -2 
+geometry = 1 2 1 -1 1 -1 1 2 2 
+#plot3dgeom = 1
+solver = 1.95 1000 50 1e-5
+plotiter = 1
+plot1d = V Z 0 0
+1ddb = 0
+1dlog = 1
+plot2d = V X 0
+plot2d = E X 0
+2dfigure = 1 1
+2ddb = 0
+2dcontour = 0
+2dobject = 1 1
+2dlog = 1
+end

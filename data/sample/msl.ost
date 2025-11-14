@@ -1,0 +1,20 @@
+OpenSTF 4 2
+title = マイクロストリップ線路の固有モード
+xmesh = -1 2 1
+ymesh = -7 40 -1 16 1 40 7
+zmesh = 0 8 0.8 30 5
+volt = 0 
+volt = 1 
+epsr = 2.2 
+geometry = 2 1 1 -1 1 -7 7 0 0.8 基板
+geometry = 1 1 1 -1 1 -7 7 0 0 グラウンド板
+geometry = 1 2 1 -1 1 -1 1 0.8 0.8 線路
+#plot3dgeom = 1
+solver = 1.95 2000 100 1e-5
+plot2d = E X 0
+2dfigure = 1 1
+2ddb = 1
+2dcontour = 0
+2dobject = 1 1
+2dlog = 1
+end

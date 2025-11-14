@@ -1,0 +1,46 @@
+PROGRAM = ../ost
+
+OMPOPT  = -fopenmp
+
+OBJS    =     \
+Main.o        \
+input_data.o  \
+monitor.o     \
+geomlines.o   \
+setupsize.o   \
+setupfactor.o \
+setupid.o     \
+ingeometry.o  \
+solve.o       \
+update.o      \
+vmisc.o       \
+echar.o       \
+writeout.o    \
+utils.o       \
+cputime.o     \
+plot3dGeom.o  \
+ev3d.o
+
+CC      = gcc
+CFLAGS  = -Ofast -I../include -Wall
+#CFLAGS  += -D_DOUBLE
+#CFLAGS  += -D_ID32
+LDFLAGS = -Ofast $(OMPOPT)
+LIBS    = -lm
+
+$(PROGRAM): $(OBJS)
+	@echo "Loading $(PROGRAM) ... "
+	@$(CC) $(LDFLAGS) -o $(PROGRAM) $(OBJS) $(LIBS)
+
+Main.o: Main.c
+	$(CC) -c $(CFLAGS) $(OMPOPT) $?
+update.o: update.c
+	$(CC) -c $(CFLAGS) $(OMPOPT) $?
+echar.o: echar.c
+	$(CC) -c $(CFLAGS) $(OMPOPT) $?
+
+.c.o:
+	$(CC) -c $(CFLAGS) $<
+
+clean:
+	rm -f *.o

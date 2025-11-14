@@ -1,0 +1,24 @@
+OpenSTF 4 2
+title = 一様電界中の誘電体球
+xmesh = -1 100 1
+ymesh = -1 100 1
+zmesh = -2 200 2
+volt = -2 
+volt = 2 
+epsr = 4 
+geometry = 1 1 1 -1 1 -1 1 -2 -2 
+geometry = 1 2 1 -1 1 -1 1 2 2 
+geometry = 2 1 2 -0.5 0.5 -0.5 0.5 -0.5 0.5 誘電体球
+#plot3dgeom = 1
+solver = 1.97 2000 100 1e-5
+plot1d = V Z 0 0
+1ddb = 0
+1dlog = 1
+plot2d = V X 0
+plot2d = E X 0
+2dfigure = 1 1
+2ddb = 0
+2dcontour = 1
+2dobject = 1 1
+2dlog = 1
+end

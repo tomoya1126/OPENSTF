@@ -1,0 +1,13 @@
+OpenSTF 4 2
+title = benchmark 200
+xmesh = -5 200 5
+ymesh = -5 200 5
+zmesh = -5 200 5
+volt = -1 
+volt = +1 
+epsr = 2.0 
+geometry = 2 1 1 -3 3 -3 3 -3 3 
+geometry = 1 1 1 -3 3 -3 3 -3 -3 
+geometry = 1 2 1 -3 3 -3 3 3 3 
+solver = 1.98 500 100 0
+end
