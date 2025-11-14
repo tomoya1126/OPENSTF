@@ -170,13 +170,18 @@ def run_simulation_and_export(input_file, output_file=None):
 
     SOLVER = sol.solve.sor if GPU == 0 else sol_cuda.solve.sor
 
+    # ダミーファイルオブジェクト（monitor関数が内部でsys.stdoutに出力するため）
+    class DummyFile:
+        def write(self, s): pass
+        def flush(self): pass
+
     nRes, fRes, iRes \
     = SOLVER(VECTOR, Parm,
         iGeometry, idVolt, idEpsr, fVolt, fEpsr, V,
         Nx, Ny, Nz,
         Npx, Npy, Npz, Ipx, Ipy, Ipz,
         iMin, iMax, jMin, jMax, kMin, kMax, Ni, Nj, Nk, N0, NN,
-        RXp, RXm, RYp, RYm, RZp, RZm, sys.stdout)  # ログを標準出力へ
+        RXp, RXm, RYp, RYm, RZp, RZm, DummyFile())
 
     cpu[2] = sol.cputime.t(comm_size, GPU)
 
